@@ -3,7 +3,7 @@ import { Module } from '@nestjs/common';
 import { CoursesService } from './courses.service';
 
 @Module({
-  controller: [CoursesController],
+  controllers: [CoursesController],
   providers: [CoursesService],
 })
 export class CoursesModule { }
