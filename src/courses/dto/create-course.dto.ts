@@ -8,5 +8,5 @@ export class CreateCourseDto {
   readonly description: string;
 
   @IsString({ each: true })
-  readonly tag: string[];
+  readonly tags: string[];
 }
