@@ -12,33 +12,36 @@ export class CoursesService {
     private readonly courseRepository: Repository<Course>,
   ) { }
 
-  findAll(): Promise<Course[]> {
+  findAll() {
     return this.courseRepository.find();
   }
 
   // findOne(id: string) {
   findOne(id) {
     const course = this.courseRepository.findOne(id);
+
     if (!course) {
       throw new NotFoundException(`Course ID ${id} not found`);
     }
+
     return course;
   }
 
-  create(createCourseDTO: CreateCourseDto) {
-    const course = this.courseRepository.create(createCourseDTO);
+  create(createCourseDto: CreateCourseDto) {
+    const course = this.courseRepository.create(createCourseDto);
     return this.courseRepository.save(course);
   }
 
-  async update(id: string, updateCourseDTO: UpdateCourseDto) {
+  async update(id: string, updateCourseDto: UpdateCourseDto) {
     const course = await this.courseRepository.preload({
       id: +id,
-      ...updateCourseDTO,
+      ...updateCourseDto,
     });
 
     if (!course) {
       throw new NotFoundException(`Course ID ${id} not found`);
     }
+
     return this.courseRepository.save(course);
   }
 
@@ -50,6 +53,6 @@ export class CoursesService {
       throw new NotFoundException(`Course ID ${id} not found`);
     }
 
-    this.courseRepository.remove(course);
+    return this.courseRepository.remove(course);
   }
 }
