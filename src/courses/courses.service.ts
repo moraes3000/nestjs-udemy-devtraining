@@ -16,8 +16,7 @@ export class CoursesService {
     return this.courseRepository.find();
   }
 
-  // findOne(id: string) {
-  findOne(id) {
+  findOne(id: string) {
     const course = this.courseRepository.findOne(id);
 
     if (!course) {
@@ -46,11 +45,11 @@ export class CoursesService {
   }
 
   // async remove(id: string) {
-  async remove(id) {
+  async remove(id: string) {
     const course = await this.courseRepository.findOne(id);
 
     if (!course) {
-      throw new NotFoundException(`Course ID ${id} not found`);
+      throw new NotFoundException(NotFoundException);
     }
 
     return this.courseRepository.remove(course);
